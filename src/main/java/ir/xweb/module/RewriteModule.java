@@ -29,7 +29,12 @@ import java.util.Enumeration;
  */
 public class RewriteModule extends Module {
 
+
+    private static final String PARAM_CONFIG_TEST = "config.text";
+
     private final UrlRewriteFilter u;
+
+    private final String text;
 
     public RewriteModule(
             final Manager manager,
@@ -39,6 +44,7 @@ public class RewriteModule extends Module {
         super(manager, info, properties);
 
         u = new UrlRewriteFilter();
+        text = properties.getString(PARAM_CONFIG_TEST, null);
     }
 
     @Override
@@ -58,15 +64,17 @@ public class RewriteModule extends Module {
                 @Override
                 public String getInitParameter(String s) {
                     if(s.equals("modRewriteConfText")) {
-                        return "RewriteCond  %{HTTP_USER_AGENT}  ^Mozilla.*\n" +
-                               "RewriteRule  ^/no-moz-here$   /homepage.max.html  [L]";
+                        return text;
                     }
                     return null;
                 }
 
                 @Override
                 public Enumeration getInitParameterNames() {
-                    return Collections.enumeration(Arrays.asList("modRewriteConfText"));
+                    if(text != null) {
+                        return Collections.enumeration(Arrays.asList("modRewriteConfText"));
+                    }
+                    return null;
                 }
             });
         } catch (Exception ex) {

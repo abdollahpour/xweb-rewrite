@@ -4,7 +4,7 @@
 	<groupId>ir.xweb</groupId>
 	<artifactId>xweb-rewrite</artifactId>
 	<packaging>jar</packaging>
-    <version>0.8.0-SNAPSHOT</version>
+    <version>0.7.0-SNAPSHOT</version>
 	<name>XWeb rewrite module</name>
 
 	<properties>
