@@ -11,6 +11,14 @@
 			<name>mail</name>
 			<class>ir.xweb.module.RewriteModule</class>
 		</module>
+		<properties>
+			<property key="config.text">
+				<![CDATA[
+					RewriteEngine on
+					RewriteRule /form /to [NC,L]
+				]]>
+			</property>
+		</properties>
 	</modules>
 
 </xweb>

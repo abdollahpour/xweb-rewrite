@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.*;
 
 public class TestRewriteModule extends TestModule {
 
@@ -28,11 +28,15 @@ public class TestRewriteModule extends TestModule {
         final HttpServletRequest request = mock(HttpServletRequest.class);
         when(request.getServerName()).thenReturn("hamed");
         when(request.getContextPath()).thenReturn("/");
+        when(request.getRequestURI()).thenReturn("/from");
 
         final HttpServletResponse response = mock(HttpServletResponse.class);
         final TestChain chain = new TestChain();
 
         m.doFilter(getServletContext(), request, response, chain);
+
+        //verify(response, times(1)).addHeader(eq("Content-Encoding"), eq("gzip"));
+        System.out.println(request.getRequestURI());
     }
 
     private class TestChain implements FilterChain {
