@@ -12,14 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
 public class TestRewriteModule extends TestModule {
-
-
-    public TestRewriteModule() throws IOException {
-    }
 
     @Test
     public void test() throws IOException, ServletException {
@@ -36,7 +31,7 @@ public class TestRewriteModule extends TestModule {
         m.doFilter(getServletContext(), request, response, chain);
 
         //verify(response, times(1)).addHeader(eq("Content-Encoding"), eq("gzip"));
-        System.out.println(request.getRequestURI());
+        System.out.println(((HttpServletRequest) chain.request).getRequestURI());
     }
 
     private class TestChain implements FilterChain {
@@ -52,10 +47,6 @@ public class TestRewriteModule extends TestModule {
         {
             this.request = servletRequest;
             this.response = servletResponse;
-        }
-
-        boolean done() {
-            return this.request != null || this.response != null;
         }
 
     }

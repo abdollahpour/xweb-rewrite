@@ -53,7 +53,7 @@ public class RewriteModule extends Module {
             u.init(new FilterConfig() {
                 @Override
                 public String getFilterName() {
-                    return "rewrite";
+                    return "UrlRewriteFilter";
                 }
 
                 @Override
